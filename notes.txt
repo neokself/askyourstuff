@@ -1,0 +1,1 @@
+pip install streamlit langchain langchain-community langchain-pinecone pinecone-client boto3 openai python-dotenv
