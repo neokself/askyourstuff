@@ -23,20 +23,20 @@ load_dotenv()
 # )
 
 # Check if the user is authenticated
-def authenticate(username, password):
-    return username == st.secrets["auth"]["username"] and password == st.secrets["auth"]["password"]
+# def authenticate(username, password):
+#     return username == st.secrets["auth"]["username"] and password == st.secrets["auth"]["password"]
 
 # Display login form
-def login():
-    st.title("Login")
-    username = st.text_input("Username")
-    password = st.text_input("Password", type="password")
-    if st.button("Login"):
-        if authenticate(username, password):
-            st.session_state["authenticated"] = True
-            st.experimental_rerun()
-        else:
-            st.error("Invalid username or password")
+# def login():
+#     st.title("Login")
+#     username = st.text_input("Username")
+#     password = st.text_input("Password", type="password")
+#     if st.button("Login"):
+#         if authenticate(username, password):
+#             st.session_state["authenticated"] = True
+#             st.experimental_rerun()
+#         else:
+#             st.error("Invalid username or password")
 
 
 
@@ -58,8 +58,8 @@ def init_bedrock():
         service_name='bedrock-runtime',
         region_name='us-east-1',
         aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
-        aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
-        aws_session_token=os.getenv("AWS_SESSION_TOKEN")  
+        aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY")
+#        aws_session_token=os.getenv("AWS_SESSION_TOKEN")  
     )
 
 # Function to set up QA chain
@@ -102,14 +102,14 @@ def setup_qa_chain():
         st.error(f"Error setting up QA system: {str(e)}")
 
 # Check authentication
-if "authenticated" not in st.session_state:
-    st.session_state["authenticated"] = False
+# if "authenticated" not in st.session_state:
+#     st.session_state["authenticated"] = False
 
-if not st.session_state["authenticated"]:
-    login()
-    
+# if not st.session_state["authenticated"]:
+#     login()
+
 # Ensure QA Chain is initialized
-elif "qa_chain" not in st.session_state:
+if "qa_chain" not in st.session_state:
     with st.spinner("Initializing QA system..."):
         setup_qa_chain()
 
