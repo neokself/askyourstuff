@@ -9,6 +9,8 @@ from pinecone import Pinecone
 import boto3
 from openai import AzureOpenAI
 from dotenv import load_dotenv 
+import streamlit as st
+from streamlit.runtime.scriptrunner import get_script_run_ctx
 
 
 # Load environment variables
@@ -19,6 +21,24 @@ load_dotenv()
 #     api_version="2024-02-01",
 #     azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT1")
 # )
+
+# Check if the user is authenticated
+def authenticate(username, password):
+    return username == st.secrets["auth"]["username"] and password == st.secrets["auth"]["password"]
+
+# Display login form
+def login():
+    st.title("Login")
+    username = st.text_input("Username")
+    password = st.text_input("Password", type="password")
+    if st.button("Login"):
+        if authenticate(username, password):
+            st.session_state["authenticated"] = True
+            st.experimental_rerun()
+        else:
+            st.error("Invalid username or password")
+
+
 
 os.environ["PINECONE_API_KEY"] = os.getenv("PINECONE_KEY")
 # Initialize Pinecone
@@ -81,8 +101,15 @@ def setup_qa_chain():
     except Exception as e:
         st.error(f"Error setting up QA system: {str(e)}")
 
+# Check authentication
+if "authenticated" not in st.session_state:
+    st.session_state["authenticated"] = False
+
+if not st.session_state["authenticated"]:
+    login()
+    
 # Ensure QA Chain is initialized
-if "qa_chain" not in st.session_state:
+elif "qa_chain" not in st.session_state:
     with st.spinner("Initializing QA system..."):
         setup_qa_chain()
 
