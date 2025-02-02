@@ -38,9 +38,6 @@ load_dotenv()
 #         else:
 #             st.error("Invalid username or password")
 
-
-
-os.environ["PINECONE_API_KEY"] = os.getenv("PINECONE_KEY")
 # Initialize Pinecone
 pc = Pinecone(api_key=os.getenv("PINECONE_KEY"))
 index_name = "pdfs"
