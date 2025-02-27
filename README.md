@@ -1,4 +1,4 @@
-# docchat
+# Askyourstuff
 
 This is an application that lets you chat with the conents from multiple pdfs
 
