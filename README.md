@@ -1,17 +1,16 @@
 # docchat
 
-This is an application that lets you chat with the conent in multiple pdfs
+This is an application that lets you chat with the conents from multiple pdfs
 
 Usecase:
 - chat with all of product manuals for all the stuff you buy at home (tools, garden,  toys, electronics etc) to find out answers on how thye woork.
 - This will eliminate the need (pain) in seeing your laptop, locating the pdf manual across the difffernet folders, scrolling the exact page, reading through that entire page and other related pages everytime you have a question. for example, 
        - what is the maximum fuel tank capacity of your car, what is the cutting depth of your tool, how to adjust this car seat, how do i clean this toooy 
 
-Heree is how you run it.
-
+Here is how you run it:
 1. Download the repo to yoour local laptop (you can also run in a cloud machines and access the app from browser anywhere)
-2. install the python libraries as you see in 'notes.txt'
-3. suupply the kekys via .env file or via command line for the following variables (Azure, AWS, Pinecone, Directory path (optional))
+2. install the python libraries as you see in 'requirements.txt'
+3. suupply the kekys via .env file or via local execution environment for the following variables (Azure, AWS, Pinecone, Directory path (optional))
 
           AZURE_OPENAI_API_KEY=xx
           AZURE_OPENAI_ENDPOINT=xx
@@ -23,10 +22,9 @@ Heree is how you run it.
           aws_access_key_id = "xx"
           aws_secret_access_key = "xx"
    
-5. Run mainaws.py if you have a llm access via aws bedrock or run mainaz.py if youo ahve llm access via azure cloud or change the llm calls in the main*.py as appropiate 
+5. Run 'streamlit run mainaws.py' if you have a llm access via aws bedrock or 'streamlit run mainaz.py' if you have llm access via azure cloud or change the llm calls in the main*.py as appropiate if you'd like to use LLMs running elsewhere
 
-How to use the application 
-
+How to use this application :
 - upload all the product manual pdfs that you may have accumulated over the years for the different products you may have bought
      - for example, user manual for your car, manual for that newly bought cutting tool
 - Ask a question in the chat window, like 
